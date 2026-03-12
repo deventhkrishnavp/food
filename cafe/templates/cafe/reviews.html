@@ -1,0 +1,73 @@
+{% extends 'cafe/base.html' %}
+{% load static %}
+
+{% block title %}Customer Reviews - Fine Kitchen{% endblock %}
+
+{% block content %}
+<section class="section-padding" style="margin-top: 80px;">
+    <div class="container">
+        <div class="text-center" data-aos="fade-up" style="margin-bottom: 50px;">
+            <h4 class="gold-text">Testimonials</h4>
+            <h2 class="section-title">What Our <span class="gold-text">Customers Say</span></h2>
+        </div>
+
+        <div class="grid grid-2">
+            {% if reviews %}
+                {% for review in reviews %}
+                <div class="card card-body" data-aos="fade-up" style="border-left: 4px solid var(--gold);">
+                    <div class="stars gold-text" style="margin-bottom: 10px;">
+                        {% for i in "12345"|make_list %}
+                            {% if forloop.counter <= review.rating %}
+                                <i class="fas fa-star"></i>
+                            {% else %}
+                                <i class="far fa-star"></i>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <p style="font-style: italic; color: var(--gray); font-size: 18px; line-height: 1.8;">"{{ review.comment }}"</p>
+                    <div style="display: flex; align-items: center; margin-top: 20px;">
+                        <div style="width: 40px; height: 40px; background-color: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                            <i class="fas fa-user" style="color: var(--primary-dark);"></i>
+                        </div>
+                        <div>
+                            <h5 style="margin: 0;">{{ review.name }}</h5>
+                            <span style="font-size: 12px; color: var(--gray);">Verified Guest</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <!-- Static Reviews from User Request -->
+                <div class="card card-body" data-aos="fade-up">
+                    <div class="stars gold-text" style="margin-bottom: 10px;">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p style="font-style: italic; color: var(--gray); font-size: 18px;">"There was nice and tasty food at an affordable rate. Very friendly customer service."</p>
+                    <h5 style="margin-top: 20px;">- The Foodie Travelist</h5>
+                </div>
+                <div class="card card-body" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stars gold-text" style="margin-bottom: 10px;">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p style="font-style: italic; color: var(--gray); font-size: 18px;">"Amazing menu with many combos. Fried rice chicken combo and chicken kothu porotta were great."</p>
+                    <h5 style="margin-top: 20px;">- Bobby Jose</h5>
+                </div>
+                <div class="card card-body" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stars gold-text" style="margin-bottom: 10px;">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p style="font-style: italic; color: var(--gray); font-size: 18px;">"Very tasty food with affordable rates. Excellent service and customer relations."</p>
+                    <h5 style="margin-top: 20px;">- Anusha ANU</h5>
+                </div>
+                <div class="card card-body" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stars gold-text" style="margin-bottom: 10px;">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p style="font-style: italic; color: var(--gray); font-size: 18px;">"Tasty food, awesome service, and good atmosphere."</p>
+                    <h5 style="margin-top: 20px;">- Bijith Biju</h5>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

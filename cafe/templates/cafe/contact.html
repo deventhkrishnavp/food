@@ -1,0 +1,74 @@
+{% extends 'cafe/base.html' %}
+{% load static %}
+
+{% block title %}Contact Us - Fine Kitchen{% endblock %}
+
+{% block content %}
+<section class="section-padding" style="margin-top: 80px;">
+    <div class="container">
+        <div class="text-center" data-aos="fade-up" style="margin-bottom: 50px;">
+            <h4 class="gold-text">Get In Touch</h4>
+            <h2 class="section-title">Contact <span class="gold-text">Fine Kitchen</span></h2>
+        </div>
+
+        <div class="grid grid-2">
+            <!-- Contact Info -->
+            <div data-aos="fade-right">
+                <div class="contact-info-item" style="margin-bottom: 30px;">
+                    <h3 style="margin-bottom: 15px;"><i class="fas fa-map-marker-alt gold-text"></i> Location</h3>
+                    <p style="color: var(--gray);">748R+8X, Opposite MES Higher Secondary School<br>Padinjare Vemballur,
+                        Kerala 680671</p>
+                </div>
+                <div class="contact-info-item" style="margin-bottom: 30px;">
+                    <h3 style="margin-bottom: 15px;"><i class="fas fa-phone gold-text"></i> Call Us</h3>
+                    <p style="color: var(--gray);">095391 05749</p>
+                </div>
+                <div class="contact-info-item" style="margin-bottom: 40px;">
+                    <h3 style="margin-bottom: 15px;"><i class="fas fa-clock gold-text"></i> Opening Hours</h3>
+                    <p style="color: var(--gray);">Open daily – Closes at 11:30 PM</p>
+                </div>
+
+                <div class="contact-actions" style="display: flex; gap: 20px;">
+                    <a href="tel:09539105749" class="btn btn-gold"><i class="fas fa-phone"></i> Call Now</a>
+                    <a href="https://wa.me/919539105749" target="_blank" class="btn btn-outline"
+                        style="border-color: #25D366; color: #25D366;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="card card-body" data-aos="fade-left">
+                <form action="{% url 'contact' %}" method="POST">
+                    {% csrf_token %}
+                    <div style="margin-bottom: 20px;">
+                        <input type="text" name="name" placeholder="Your Name" required
+                            style="width: 100%; padding: 12px; background: var(--primary-dark); border: 1px solid rgba(255,255,255,0.1); color: var(--white); border-radius: 4px;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <input type="email" name="email" placeholder="Your Email" required
+                            style="width: 100%; padding: 12px; background: var(--primary-dark); border: 1px solid rgba(255,255,255,0.1); color: var(--white); border-radius: 4px;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <input type="text" name="subject" placeholder="Subject" required
+                            style="width: 100%; padding: 12px; background: var(--primary-dark); border: 1px solid rgba(255,255,255,0.1); color: var(--white); border-radius: 4px;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <textarea name="message" placeholder="Your Message" rows="5" required
+                            style="width: 100%; padding: 12px; background: var(--primary-dark); border: 1px solid rgba(255,255,255,0.1); color: var(--white); border-radius: 4px;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-gold" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Google Maps Embed -->
+        <div class="map-container"
+            style="margin-top: 60px; border-radius: 8px; overflow: hidden; border: 1px solid var(--gold);"
+            data-aos="fade-up">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3925.9469563039415!2d76.13983111060163!3d10.265857789811243!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b081febd8c39f13%3A0x472103574a22281c!2sFine%20Kitchen!5e0!3m2!1sen!2sin!4v1773296908177!5m2!1sen!2sin"
+                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
+        </div>
+    </div>
+</section>
+{% endblock %}

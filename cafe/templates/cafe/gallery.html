@@ -1,0 +1,105 @@
+{% extends 'cafe/base.html' %}
+{% load static %}
+
+{% block title %}Gallery - Fine Kitchen{% endblock %}
+
+{% block extra_css %}
+<style>
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+    .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        height: 300px;
+        cursor: pointer;
+    }
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+    }
+    .gallery-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(200, 169, 106, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: var(--transition);
+    }
+    .gallery-item:hover img {
+        transform: scale(1.1);
+    }
+    .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+    }
+    .gallery-overlay h4 {
+        color: var(--primary-dark);
+        font-size: 20px;
+        transform: translateY(20px);
+        transition: var(--transition);
+    }
+    .gallery-item:hover .gallery-overlay h4 {
+        transform: translateY(0);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="section-padding" style="margin-top: 80px;">
+    <div class="container">
+        <div class="text-center" data-aos="fade-up" style="margin-bottom: 50px;">
+            <h4 class="gold-text">Visual Showcase</h4>
+            <h2 class="section-title">A Glimpse of <span class="gold-text">Fine Kitchen</span></h2>
+        </div>
+
+        <div class="gallery-grid">
+            {% if images %}
+                {% for image in images %}
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="{{ forloop.counter }}00">
+                    <img src="{{ image.image.url }}" alt="{{ image.caption }}">
+                    <div class="gallery-overlay">
+                        <h4>{{ image.caption }}</h4>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <!-- Placeholder Gallery Images -->
+                <div class="gallery-item" data-aos="zoom-in">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Food 1">
+                    <div class="gallery-overlay"><h4>Delicious Combos</h4></div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1476224484781-34449767669d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Food 2">
+                    <div class="gallery-overlay"><h4>Fresh Ingredients</h4></div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1432139555190-58524dae6a55?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Food 3">
+                    <div class="gallery-overlay"><h4>Hot & Tasty</h4></div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Interior">
+                    <div class="gallery-overlay"><h4>Cosy Atmosphere</h4></div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
+                    <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Food 4">
+                    <div class="gallery-overlay"><h4>Chef's Specials</h4></div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="500">
+                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Food 5">
+                    <div class="gallery-overlay"><h4>Traditional Taste</h4></div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

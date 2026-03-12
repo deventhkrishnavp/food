@@ -1,0 +1,57 @@
+{% extends 'cafe/base.html' %}
+{% load static %}
+
+{% block title %}Our Menu - Fine Kitchen{% endblock %}
+
+{% block content %}
+<section class="section-padding" style="margin-top: 80px;">
+    <div class="container">
+        <div class="text-center" data-aos="fade-up" style="margin-bottom: 50px;">
+            <h4 class="gold-text">Flavorful & Affordable</h4>
+            <h2 class="section-title">Explore Our <span class="gold-text">Delicious Menu</span></h2>
+        </div>
+
+        <div class="menu-filters" data-aos="fade-up" style="display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap;">
+            <button class="filter-btn active" data-filter="all">All</button>
+            {% for category in categories %}
+            <button class="filter-btn" data-filter="{{ category.name|slugify }}">{{ category.name }}</button>
+            {% endfor %}
+        </div>
+
+        {% if categories %}
+            <div class="menu-container">
+            {% for category in categories %}
+            <div class="menu-category" data-category="{{ category.name|slugify }}" style="margin-bottom: 60px;" data-aos="fade-up">
+                <h3 style="font-size: 32px; border-bottom: 2px solid var(--gold); display: inline-block; margin-bottom: 30px; padding-bottom: 5px;">{{ category.name }}</h3>
+                <div class="grid grid-3">
+                    {% for item in category.items.all %}
+                    {% if item.is_available %}
+                    <div class="card menu-item" data-category="{{ category.name|slugify }}">
+                        <div class="card-img">
+                            <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                        </div>
+                        <div class="card-body">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h4 style="margin: 0;">{{ item.name }}</h4>
+                                <span class="gold-text" style="font-weight: 700;">₹{{ item.price }}</span>
+                            </div>
+                            <p style="color: var(--gray); font-size: 14px; margin-bottom: 15px;">{{ item.description }}</p>
+                            <a href="https://wa.me/919539105749?text=I'd like to order {{ item.name }}" target="_blank" class="btn btn-gold btn-sm" style="padding: 8px 15px; font-size: 12px; width: 100%; text-align: center;">Order on WhatsApp</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+        {% else %}
+            <!-- Placeholder Menu Items if database is empty -->
+            <div class="text-center" data-aos="fade-up">
+                <p>Our dynamic menu is being updated. Please check back soon or call us to order!</p>
+                <a href="{% url 'contact' %}" class="btn btn-gold" style="margin-top: 20px;">Contact Us to Order</a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'cafe/base.html' %}
+{% load static %}
+
+{% block title %}About Us - Fine Kitchen{% endblock %}
+
+{% block content %}
+<section class="section-padding" style="margin-top: 80px;">
+    <div class="container">
+        <div class="grid grid-2 align-center">
+            <div data-aos="fade-right">
+                <h4 class="gold-text">Our Story</h4>
+                <h2 style="font-size: 48px; margin-bottom: 20px;">A Legacy of <br><span class="gold-text">Delicious Taste</span></h2>
+                <p>Fine Kitchen is a friendly family restaurant located in Padinjare Vemballur, Kerala. We pride ourselves on offering tasty and affordable food in a casual, welcoming atmosphere.</p>
+                <p style="margin-top: 20px;">Whether you're visiting with family, a large group of friends, or dining solo, our restaurant provides the perfect setting for a memorable meal. We specialize in delicious combo meals that offer great value for money without compromising on flavor.</p>
+                
+                <div class="stats grid grid-2" style="margin-top: 40px;">
+                    <div>
+                        <h3 class="gold-text">3.8+</h3>
+                        <p>Star Rating</p>
+                    </div>
+                    <div>
+                        <h3 class="gold-text">100%</h3>
+                        <p>Family Friendly</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-img" data-aos="fade-left">
+                <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Restaurant Interior" style="border-radius: 8px; border: 1px solid var(--gold); padding: 10px;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-padding" style="background-color: var(--secondary-dark);">
+    <div class="container">
+        <div class="text-center" data-aos="fade-up" style="margin-bottom: 50px;">
+            <h2 class="section-title">Our <span class="gold-text">Core Values</span></h2>
+        </div>
+        <div class="grid grid-3">
+            <div class="card card-body text-center" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-heart gold-text" style="font-size: 30px; margin-bottom: 15px;"></i>
+                <h3>Quality Food</h3>
+                <p>We use the freshest ingredients to prepare every meal with love and care.</p>
+            </div>
+            <div class="card card-body text-center" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-wallet gold-text" style="font-size: 30px; margin-bottom: 15px;"></i>
+                <h3>Affordable</h3>
+                <p>Tasty food doesn't have to be expensive. Our prices are friendly for everyone.</p>
+            </div>
+            <div class="card card-body text-center" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-users gold-text" style="font-size: 30px; margin-bottom: 15px;"></i>
+                <h3>Service</h3>
+                <p>Friendly customer service and excellent relations are at the heart of our restaurant.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

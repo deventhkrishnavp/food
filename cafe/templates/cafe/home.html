@@ -1,0 +1,148 @@
+{% extends 'cafe/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>Fine Kitchen – <span class="gold-text">The Complete Food Hub</span> of Delicious Flavors</h1>
+            <p>A friendly family restaurant offering tasty and affordable food with a casual atmosphere. Perfect for
+                families, groups, and solo dining.</p>
+            <div class="hero-btns">
+                <a href="{% url 'menu' %}" class="btn btn-gold">View Menu</a>
+                <a href="{% url 'contact' %}" class="btn btn-outline">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features section-padding">
+    <div class="container">
+        <div class="text-center" data-aos="fade-up" style="margin-bottom: 50px;">
+            <h2 class="section-title">Why <span class="gold-text">Fine Kitchen</span>?</h2>
+            <p>Discover the flavor of Kerala with our specially curated menu.</p>
+        </div>
+        <div class="grid grid-4">
+            <div class="feature-item text-center" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-truck gold-text" style="font-size: 40px; margin-bottom: 20px;"></i>
+                <h4>Fast Delivery</h4>
+                <p>Hot and fresh food delivered to your doorstep.</p>
+            </div>
+            <div class="feature-item text-center" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-utensils gold-text" style="font-size: 40px; margin-bottom: 20px;"></i>
+                <h4>Dine-in</h4>
+                <p>Enjoy our casual and family-friendly atmosphere.</p>
+            </div>
+            <div class="feature-item text-center" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-shopping-bag gold-text" style="font-size: 40px; margin-bottom: 20px;"></i>
+                <h4>Takeaway</h4>
+                <p>Quick and convenient pickup options available.</p>
+            </div>
+            <div class="feature-item text-center" data-aos="fade-up" data-aos-delay="400">
+                <i class="fas fa-tree gold-text" style="font-size: 40px; margin-bottom: 20px;"></i>
+                <h4>Outdoor Seating</h4>
+                <p>Relax and dine in our outdoor seating area.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Menu Section -->
+<section class="featured-menu section-padding" style="background-color: var(--secondary-dark);">
+    <div class="container">
+        <div class="text-center" data-aos="fade-up" style="margin-bottom: 50px;">
+            <h2 class="section-title">Our <span class="gold-text">Best Sellers</span></h2>
+            <p>Try our most popular dishes that our customers love.</p>
+        </div>
+        <div class="grid grid-3">
+            {% if featured_items %}
+            {% for item in featured_items %}
+            <div class="card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:1 }}00">
+                <div class="card-img">
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                </div>
+                <div class="card-body">
+                    <h3>{{ item.name }}</h3>
+                    <p class="price">₹{{ item.price }}</p>
+                    <p>{{ item.description|truncatewords:15 }}</p>
+                    <a href="{% url 'menu' %}" class="btn btn-gold"
+                        style="margin-top: 15px; width: 100%; text-align: center;">Order Now</a>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="text-center" style="grid-column: 1 / -1; padding: 40px;">
+                <p style="color: var(--gray);">Discover our full menu for all available delicious options.</p>
+                <a href="{% url 'menu' %}" class="btn btn-gold" style="margin-top: 20px;">Browse Menu</a>
+            </div>
+            {% endif %}
+        </div>
+        <div class="text-center" style="margin-top: 50px;">
+            <a href="{% url 'menu' %}" class="btn btn-outline">View Full Menu</a>
+        </div>
+    </div>
+</section>
+
+<!-- Reviews Section -->
+<section class="reviews section-padding">
+    <div class="container">
+        <div class="text-center" data-aos="fade-up" style="margin-bottom: 50px;">
+            <h2 class="section-title">What Our <span class="gold-text">Guests Say</span></h2>
+            <p>Our customers' satisfaction is our priority. Read our latest reviews.</p>
+        </div>
+        <div class="grid grid-3">
+            {% if reviews %}
+            {% for review in reviews %}
+            <div class="review-card" data-aos="fade-up">
+                <div class="stars gold-text">
+                    {% for i in "12345"|make_list %}
+                    {% if forloop.counter <= review.rating %} <i class="fas fa-star"></i>
+                        {% else %}
+                        <i class="far fa-star"></i>
+                        {% endif %}
+                        {% endfor %}
+                </div>
+                <p>"{{ review.comment }}"</p>
+                <h5>- {{ review.name }}</h5>
+            </div>
+            {% endfor %}
+            {% else %}
+            <!-- Static Reviews from User Request -->
+            <div class="card card-body" data-aos="fade-up">
+                <div class="stars gold-text" style="margin-bottom: 15px;">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                        class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p style="font-style: italic; color: var(--gray);">"There was nice and tasty food at an affordable rate.
+                    Very friendly customer service."</p>
+                <h5 style="margin-top: 15px;">- The Foodie Travelist</h5>
+            </div>
+            <div class="card card-body" data-aos="fade-up" data-aos-delay="100">
+                <div class="stars gold-text" style="margin-bottom: 15px;">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                        class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p style="font-style: italic; color: var(--gray);">"Amazing menu with many combos. Fried rice chicken
+                    combo and chicken kothu porotta were great."</p>
+                <h5 style="margin-top: 15px;">- Bobby Jose</h5>
+            </div>
+            <div class="card card-body" data-aos="fade-up" data-aos-delay="200">
+                <div class="stars gold-text" style="margin-bottom: 15px;">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                        class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p style="font-style: italic; color: var(--gray);">"Delicious food in a calm atmosphere. Value for
+                    money."</p>
+                <h5 style="margin-top: 15px;">- Aneeshk Vijayan</h5>
+            </div>
+            {% endif %}
+        </div>
+        <div class="text-center" style="margin-top: 40px;">
+            <a href="{% url 'reviews' %}" class="btn btn-outline" style="border: none; text-decoration: underline;">See
+                More Reviews</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
