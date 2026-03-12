@@ -194,6 +194,7 @@ img {
     color: var(--white);
     font-size: 24px;
     cursor: pointer;
+    z-index: 1002;
 }
 
 /* Hero Section */
@@ -386,7 +387,25 @@ img {
 
 @media (max-width: 768px) {
 
-    .nav-links,
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(17, 17, 17, 0.98);
+        padding: 40px 20px;
+        text-align: center;
+        gap: 20px;
+        border-bottom: 1px solid rgba(200, 169, 106, 0.2);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
     .nav-cta {
         display: none;
     }
@@ -395,8 +414,18 @@ img {
         display: block;
     }
 
+    .logo {
+        height: 70px;
+        width: 140px;
+    }
+
+    .navbar-logo {
+        height: 90px;
+    }
+
     .grid-2,
-    .grid-3 {
+    .grid-3,
+    .grid-4 {
         grid-template-columns: 1fr;
     }
 
@@ -406,5 +435,14 @@ img {
 
     .section-padding {
         padding: 60px 0;
+    }
+
+    .footer {
+        text-align: center;
+    }
+
+    .social-links,
+    .newsletter-form {
+        justify-content: center;
     }
 }
