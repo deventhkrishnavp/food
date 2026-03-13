@@ -1,5 +1,72 @@
 {% extends 'cafe/base.html' %}
 {% load static %}
+{% block extra_css %}
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<style>
+    .best-sellers-section {
+        overflow: hidden;
+        padding-bottom: 50px;
+    }
+
+    .swiper {
+        width: 100%;
+        padding: 20px 0 50px;
+        position: relative;
+    }
+
+    .swiper-slide {
+        height: auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    .swiper-pagination-bullet {
+        background: var(--gray);
+    }
+
+    .swiper-pagination-bullet-active {
+        background: var(--gold);
+    }
+
+    @media (max-width: 768px) {
+        .swiper {
+            padding: 20px 20px 50px;
+            /* Reduced padding on mobile */
+        }
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const swiper = new Swiper('.swiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 1000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+    });
+</script>
+{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
@@ -50,37 +117,44 @@
 </section>
 
 <!-- Featured Menu Section -->
-<section class="featured-menu section-padding" style="background-color: var(--secondary-dark);">
+<section class="featured-menu section-padding best-sellers-section" style="background-color: var(--secondary-dark);">
     <div class="container">
         <div class="text-center" data-aos="fade-up" style="margin-bottom: 50px;">
             <h2 class="section-title">Our <span class="gold-text">Best Sellers</span></h2>
             <p>Try our most popular dishes that our customers love.</p>
         </div>
-        <div class="grid grid-3">
-            {% if featured_items %}
-            {% for item in featured_items %}
-            <div class="card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:1 }}00">
-                <div class="card-img">
-                    <img src="{{ item.image.url }}" alt="{{ item.name }}">
+
+        <!-- Swiper -->
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                {% if featured_items %}
+                {% for item in featured_items %}
+                <div class="swiper-slide">
+                    <div class="card" style="width: 100%; margin: 0 10px;">
+                        <div class="card-img">
+                            <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                        </div>
+                        <div class="card-body">
+                            <h3>{{ item.name }}</h3>
+                            <p class="price">₹{{ item.price }}</p>
+                            <p>{{ item.description|truncatewords:15 }}</p>
+                            <a href="{% url 'menu' %}" class="btn btn-gold"
+                                style="margin-top: 15px; width: 100%; text-align: center;">Order Now</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <h3>{{ item.name }}</h3>
-                    <p class="price">₹{{ item.price }}</p>
-                    <p>{{ item.description|truncatewords:15 }}</p>
-                    <a href="{% url 'menu' %}" class="btn btn-gold"
-                        style="margin-top: 15px; width: 100%; text-align: center;">Order Now</a>
+                {% endfor %}
+                {% else %}
+                <div class="swiper-slide">
+                    <div class="text-center" style="padding: 40px;">
+                        <p style="color: var(--gray);">Discover our full menu for all available delicious options.</p>
+                        <a href="{% url 'menu' %}" class="btn btn-gold" style="margin-top: 20px;">Browse Menu</a>
+                    </div>
                 </div>
+                {% endif %}
             </div>
-            {% endfor %}
-            {% else %}
-            <div class="text-center" style="grid-column: 1 / -1; padding: 40px;">
-                <p style="color: var(--gray);">Discover our full menu for all available delicious options.</p>
-                <a href="{% url 'menu' %}" class="btn btn-gold" style="margin-top: 20px;">Browse Menu</a>
-            </div>
-            {% endif %}
-        </div>
-        <div class="text-center" style="margin-top: 50px;">
-            <a href="{% url 'menu' %}" class="btn btn-outline">View Full Menu</a>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
         </div>
     </div>
 </section>

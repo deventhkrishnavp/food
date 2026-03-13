@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('Main JS loaded');
     // Mobile Menu Toggle
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
@@ -8,9 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
             navLinks.classList.toggle('active');
             const icon = mobileMenuBtn.querySelector('i');
             if (navLinks.classList.contains('active')) {
-                icon.classList.replace('fa-bars', 'fa-times');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
             } else {
-                icon.classList.replace('fa-times', 'fa-bars');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
             }
         });
     }
